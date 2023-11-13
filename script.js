@@ -10,6 +10,8 @@ xhr.open('GET', 'http://localhost:3000/jokes');
 xhr.send();
 xhr.responseType = 'json';
 xhr.onload = () => {
+    console.log('jokes')
+    console.log(xhr.response)
     const jokes = xhr.response;
     if(jokes.light){
         jokesContainer.innerHTML = ''
