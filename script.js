@@ -1,9 +1,9 @@
 
-const jokesContainer = document.getElementById('jokes_container');
+// const jokesContainer = document.getElementById('jokes_container');
 
-const jokeForm = document.getElementById('joke_form');
+// const jokeForm = document.getElementById('joke_form');
 
-let currentLength = 0;
+// let currentLength = 0;
 
 const xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://localhost:3000/jokes');
