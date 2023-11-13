@@ -13,10 +13,10 @@ xhr.onload = () => {
     console.log('jokes')
     console.log(xhr.response)
     const jokes = xhr.response;
-    if(jokes.light){
+    if(jokes.length){
         jokesContainer.innerHTML = ''
         jokes.forEach(joke => {
-            jokesConteiner.innerHTML += getJokeHTML(joke)
+            jokesContainer.innerHTML += getJokeHTML(joke)
         });
     }    
 };
