@@ -29,13 +29,14 @@ function getJokeHTML(joke){
         </div>
         <div class="joke__footer">
             <div class="joke__likes">
-                <span>${joke.likes}</span>
+                <span id="joke__likes">${joke.likes}</span>
             </div>
             </div>
         <button class="joke__btn">
             <span class="material-symbols-outlined">
                 thumb_up
             </span>
+            
         </button>
     </div>
     `
