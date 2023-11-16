@@ -25,11 +25,11 @@ function getJokeHTML(joke){
     return `
         <div class="joke">
         <div class="joke__content">
-            $(joke.content)
+            ${joke.content}
         </div>
         <div class="joke__footer">
             <div class="joke__likes">
-                <span>$(joke.likes)</span>
+                <span>${joke.likes}</span>
             </div>
             </div>
         <button class="joke__btn">
