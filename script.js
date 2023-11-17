@@ -1,3 +1,4 @@
+// const { json } = require("node:stream/consumers");
 
 const jokesContainer = document.getElementById('jokes_container');
 
@@ -29,15 +30,48 @@ function getJokeHTML(joke){
         </div>
         <div class="joke__footer">
             <div class="joke__likes">
-                <span id="joke__likes">${joke.likes}</span>
+                <span>${joke.likes}</span>
+                <button class="joke__btn">
+                <span class="material-symbols-outlined">
+                    thumb_up
+                </span>
+                </button>
             </div>
-            </div>
-        <button class="joke__btn">
-            <span class="material-symbols-outlined">
-                thumb_up
-            </span>
-            
-        </button>
-    </div>
+        </div>
+        </div>
     `
+}
+
+jokeForm.addEventListener('submit', (event) => {
+    event.preventDefault()
+    const content = jokeForm.joke.value
+    const joke = {content, like: 0, dislike: 0, id: currentLength}
+    const addJokeXhr = new XMLHttpRequest
+    addJokeXhr.open('POST', 'http://localhost:3000/jokes')
+    addJokeXhr.send(JSON.stringify(joke))
+    addJokeXhr.onload = () => {
+        jokesContainer.innerHTML += getJokeHTML(joke)
+        currentLength++
+    }
+})
+
+function like(id){
+    const xhrLike = new XMLHttpRequest
+    xhrLike.open('GET', 'http://localhost:3000/like?id='+id)
+    xhrLike.send()
+    xhrLike.responseType = 'json'
+    xhrLike.onload = () => {
+        const joke = xhrLike.response
+        document.getElementById('joke_'+id).outerHTML = getJokeHTML(joke)
+    }
+}
+function dislike(id){
+    const xhrDislike = new XMLHttpRequest
+    xhrDislike.open('GET', 'http://localhost:3000/dislike?id='+id)
+    xhrDislike.send()
+    xhrDislike.responseType = 'json'
+    xhrDislike.onload = () => {
+        const joke = xhrDislike.response
+        document.getElementById('joke_'+id).outerHTML = getJokeHTML(joke)
+    }
 }

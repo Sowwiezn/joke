@@ -92,7 +92,9 @@ main {
     justify-content: space-around;
 }
 .joke__likes{
-    
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 .joke__btn {
     background: 0;
