@@ -19,7 +19,8 @@ xhr.onload = () => {
         jokes.forEach(joke => {
             jokesContainer.innerHTML += getJokeHTML(joke)
         });
-    }    
+    }
+        
 };
 
 function getJokeHTML(joke){
@@ -31,12 +32,20 @@ function getJokeHTML(joke){
         <div class="joke__footer">
             <div class="joke__likes">
                 <span>${joke.likes}</span>
-                <button class="joke__btn">
-                <span class="material-symbols-outlined">
-                    thumb_up
-                </span>
+                <button class="joke__btn" onclick="like(${joke.id})">
+                    <span class="material-symbols-outlined">
+                        thumb_up
+                    </span>                
                 </button>
             </div>
+            <div class="joke__likes">
+                <span>${joke.dislikes}</span>
+                <button class="joke__btn" onclick="dislike(${joke.id})">
+                <span class="material-symbols-outlined">
+                    thumb_down
+                </span>
+                </button>
+            </div>    
         </div>
         </div>
     `
@@ -45,7 +54,7 @@ function getJokeHTML(joke){
 jokeForm.addEventListener('submit', (event) => {
     event.preventDefault()
     const content = jokeForm.joke.value
-    const joke = {content, like: 0, dislike: 0, id: currentLength}
+    const joke = {content, likes: 0, dislikes: 0, id: currentLength}
     const addJokeXhr = new XMLHttpRequest
     addJokeXhr.open('POST', 'http://localhost:3000/jokes')
     addJokeXhr.send(JSON.stringify(joke))
@@ -57,7 +66,7 @@ jokeForm.addEventListener('submit', (event) => {
 
 function like(id){
     const xhrLike = new XMLHttpRequest
-    xhrLike.open('GET', 'http://localhost:3000/like?id='+id)
+    xhrLike.open('GET', 'http://localhost:3000/likes?id='+id)
     xhrLike.send()
     xhrLike.responseType = 'json'
     xhrLike.onload = () => {
@@ -67,7 +76,7 @@ function like(id){
 }
 function dislike(id){
     const xhrDislike = new XMLHttpRequest
-    xhrDislike.open('GET', 'http://localhost:3000/dislike?id='+id)
+    xhrDislike.open('GET', 'http://localhost:3000/dislikes?id='+id)
     xhrDislike.send()
     xhrDislike.responseType = 'json'
     xhrDislike.onload = () => {
